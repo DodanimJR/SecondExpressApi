@@ -1,32 +1,31 @@
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient()
-const getAllFacultys = async()=>{
-    const Facultys = await prisma.Faculty.findMany();
-    return Facultys;
+const getAllStudents = async()=>{
+    const Students = await prisma.Student.findMany();
+    return Students;
 }
-const createFaculty = async(bodys)=>{
+const createStudent = async(bodys)=>{
     try {
         const params=bodys.value;
-        const newFaculty =await prisma.Faculty.create({
+        const newStudent =await prisma.Student.create({
             data:{
                 "nombre":params.nombre,
-                "nombre_decano":params.nombre_decano,
-                "abreviacion":params.abreviacion
+                "facultadId":params.facultadId,
             }
             
         });
-        return newFaculty;
+        return newStudent;
     } catch (error) {
         throw error
     }
 }
-const getFacultyById = async(id)=>{
+const getStudentById = async(id)=>{
     try {
         const finalId= parseInt(id);
-        const Faculty = await prisma.Faculty.findUnique({where:{id:finalId}});
-        if(Faculty!=null){
-            return Faculty;
+        const Student = await prisma.Student.findUnique({where:{id:finalId}});
+        if(Student!=null){
+            return Student;
         }else{
             return("NOT FOUND")
         }
@@ -36,10 +35,10 @@ const getFacultyById = async(id)=>{
     }
 }
 
-const UpdateFaculty = async(params,id)=>{
+const UpdateStudent = async(params,id)=>{
     try {
         const finalId= parseInt(id);
-        const Faculty = await prisma.Faculty.update({
+        const Student = await prisma.Student.update({
             where:{id:finalId},
             data:{
                 "nombre":params.nombre,
@@ -50,8 +49,8 @@ const UpdateFaculty = async(params,id)=>{
                 "carrera":params.carrera
             }
         });
-        if(Faculty!=null){
-            return Faculty;
+        if(Student!=null){
+            return Student;
         }else{
             return("NOT FOUND")
         }
@@ -61,12 +60,12 @@ const UpdateFaculty = async(params,id)=>{
     }
 }
 
-const RemoveFaculty = async(id)=>{
+const RemoveStudent = async(id)=>{
     try {
         const finalId= parseInt(id);
-        const Faculty = await prisma.Faculty.delete({where:{id:finalId}});
-        if(Faculty!=null){
-            return Faculty;
+        const Student = await prisma.Student.delete({where:{id:finalId}});
+        if(Student!=null){
+            return Student;
         }else{
             return("NOT FOUND")
         }
@@ -77,9 +76,9 @@ const RemoveFaculty = async(id)=>{
 }
 
 module.exports={
-    createFaculty,
-    getAllFacultys,
-    getFacultyById,
-    UpdateFaculty,
-    RemoveFaculty
+    createStudent,
+    getAllStudents,
+    getStudentById,
+    UpdateStudent,
+    RemoveStudent
 }

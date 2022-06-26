@@ -1,12 +1,12 @@
 const express = require('express');
-const assignmentController = require('./controller')
+const StudentController = require('./controller')
 const router = express.Router();
 
-router.get('/',assignmentController.getAll);
-router.post('/',assignmentController.create);
-router.get('/:id',assignmentController.getbyId);
-router.put('/:id',assignmentController.update);
-router.delete('/:id',assignmentController.remove);
+router.get('/',StudentController.getAll);
+router.post('/',StudentController.create);
+router.get('/:id',StudentController.getbyId);
+router.put('/:id',StudentController.update);
+router.delete('/:id',StudentController.remove);
 
 
 module.exports=router;  

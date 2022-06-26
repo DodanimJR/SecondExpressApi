@@ -12,6 +12,7 @@ datasource db {
 
 model Student{
   id Int @id @default(autoincrement())
+  nombre String
   materias studentsOnAssignments[]
   facultad Faculty @relation(fields: [facultadId],references: [id])
   facultadId Int
