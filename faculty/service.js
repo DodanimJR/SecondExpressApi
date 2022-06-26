@@ -2,34 +2,31 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient()
 const getAllFacultys = async()=>{
-    const Facultys = await prisma.Assignment.findMany();
+    const Facultys = await prisma.Faculty.findMany();
     return Facultys;
 }
-const createAssignMent = async(bodys)=>{
+const createFaculty = async(bodys)=>{
     try {
         const params=bodys.value;
-        const newAssignMent =await prisma.Assignment.create({
+        const newFaculty =await prisma.Faculty.create({
             data:{
                 "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "nombre_decano":params.nombre_decano,
+                "abreviacion":params.abreviacion
             }
             
         });
-        return newAssignMent;
+        return newFaculty;
     } catch (error) {
         throw error
     }
 }
-const getAssignMentById = async(id)=>{
+const getFacultyById = async(id)=>{
     try {
         const finalId= parseInt(id);
-        const AssignMent = await prisma.Assignment.findUnique({where:{id:finalId}});
-        if(AssignMent!=null){
-            return AssignMent;
+        const Faculty = await prisma.Faculty.findUnique({where:{id:finalId}});
+        if(Faculty!=null){
+            return Faculty;
         }else{
             return("NOT FOUND")
         }
@@ -39,10 +36,10 @@ const getAssignMentById = async(id)=>{
     }
 }
 
-const UpdateAssignMent = async(params,id)=>{
+const UpdateFaculty = async(params,id)=>{
     try {
         const finalId= parseInt(id);
-        const AssignMent = await prisma.Assignment.update({
+        const Faculty = await prisma.Faculty.update({
             where:{id:finalId},
             data:{
                 "nombre":params.nombre,
@@ -53,8 +50,8 @@ const UpdateAssignMent = async(params,id)=>{
                 "carrera":params.carrera
             }
         });
-        if(AssignMent!=null){
-            return AssignMent;
+        if(Faculty!=null){
+            return Faculty;
         }else{
             return("NOT FOUND")
         }
@@ -64,12 +61,12 @@ const UpdateAssignMent = async(params,id)=>{
     }
 }
 
-const RemoveAssignMent = async(id)=>{
+const RemoveFaculty = async(id)=>{
     try {
         const finalId= parseInt(id);
-        const AssignMent = await prisma.Assignment.delete({where:{id:finalId}});
-        if(AssignMent!=null){
-            return AssignMent;
+        const Faculty = await prisma.Faculty.delete({where:{id:finalId}});
+        if(Faculty!=null){
+            return Faculty;
         }else{
             return("NOT FOUND")
         }
@@ -80,9 +77,9 @@ const RemoveAssignMent = async(id)=>{
 }
 
 module.exports={
-    createAssignMent,
+    createFaculty,
     getAllFacultys,
-    getAssignMentById,
-    UpdateAssignMent,
-    RemoveAssignMent
+    getFacultyById,
+    UpdateFaculty,
+    RemoveFaculty
 }

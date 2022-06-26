@@ -1,13 +1,10 @@
 const Joi = require('joi')
-const AssignMentModel= Joi.object({
+const FacultyModel= Joi.object({
     nombre: Joi.string().required(), 
-    codigo: Joi.string().required(), 
-    profesor: Joi.string().required(), 
-    inicialesProfesor: Joi.string().required(), 
-    creditos: Joi.number().integer().required(),
-    carrera: Joi.string().required(), 
+    nombre_decano: Joi.string().required(), 
+    abreviacion: Joi.string().required(), 
 })
 
 module.exports={
-    AssignMentModel
+    FacultyModel
 }
