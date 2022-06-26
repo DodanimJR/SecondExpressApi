@@ -13,26 +13,27 @@ datasource db {
 model Student{
   id Int @id @default(autoincrement())
   nombre String
-  materias studentsOnAssignments[]
+  materias Matricula[]
   facultad Faculty @relation(fields: [facultadId],references: [id])
   facultadId Int
 }
 
 model Assignment{
   id Int @id @default(autoincrement())
-  estudiantes studentsOnAssignments[]
+  estudiantes Matricula[]
   nombre String
   profesor Teacher @relation(fields: [profesorId],references: [id])
   profesorId Int 
   facultad Faculty @relation(fields: [facultadId],references: [id])
   facultadId Int
 }
-model studentsOnAssignments{
+model Matricula{
+  id Int @id @default(autoincrement())
   estudiante Student @relation(fields: [estudianteId],references: [id])
   estudianteId Int
   materia Assignment @relation(fields: [materiaId],references: [id])
   materiaId Int
-  @@id([estudianteId,materiaId])
+  
 }
 model Teacher{
   id Int @id @default(autoincrement())
