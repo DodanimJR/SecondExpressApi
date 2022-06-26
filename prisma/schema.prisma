@@ -20,6 +20,7 @@ model Student{
 model Assignment{
   id Int @id @default(autoincrement())
   estudiantes studentsOnAssignments[]
+  nombre String
   profesor Teacher @relation(fields: [profesorId],references: [id])
   profesorId Int 
   facultad Faculty @relation(fields: [facultadId],references: [id])
