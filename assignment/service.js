@@ -11,11 +11,8 @@ const createAssignMent = async(bodys)=>{
         const newAssignMent =await prisma.Assignment.create({
             data:{
                 "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "profesorId":params.profesorId,
+                "facultadId":params.facultadId
             }
             
         });

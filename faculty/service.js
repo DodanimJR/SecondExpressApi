@@ -3,6 +3,23 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 const getAllFacultys = async()=>{
     const Facultys = await prisma.Faculty.findMany();
+    for (facultad of Facultys){
+        facultad.materias= await prisma.Assignment.findMany({where:{facultadId:facultad.id}});
+        for(materia of facultad.materias){
+            delete materia.id;
+            delete materia.facultadId; 
+            materia.profesor=await prisma.Teacher.findUnique({where:{id:materia.profesorId}});
+            delete materia.profesorId;
+            delete materia.profesor.id;
+            delete materia.profesor.facultadId;
+        }
+        facultad.profesores= await prisma.Teacher.findMany({where:{facultadId:facultad.id}})
+        for(profesor of facultad.profesores){
+            delete profesor.id;
+            delete profesor.facultadId;
+        }
+        //console.log(facultad);
+    }
     return Facultys;
 }
 const createFaculty = async(bodys)=>{
