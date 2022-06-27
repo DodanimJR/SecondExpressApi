@@ -43,11 +43,9 @@ const UpdateAssignMent = async(params,id)=>{
             where:{id:finalId},
             data:{
                 "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "profesorId":params.profesorId,
+                "facultadId":params.facultadId
+            
             }
         });
         if(AssignMent!=null){

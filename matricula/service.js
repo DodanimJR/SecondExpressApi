@@ -42,12 +42,9 @@ const UpdateMatricula = async(params,id)=>{
         const Matricula = await prisma.Matricula.update({
             where:{id:finalId},
             data:{
-                "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "cuatrimestre":params.cuatrimestre,
+                "estudianteId":params.estudianteId,
+                "materiaId":params.materiaId
             }
         });
         if(Matricula!=null){
