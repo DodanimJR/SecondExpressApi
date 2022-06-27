@@ -83,7 +83,6 @@ const getTeacherStudentsById = async(id)=>{
         if(Teacher!=null){
             let materias=await prisma.Assignment.findMany({where:{profesorId:Teacher.id}});
             let tempEstudiantes = [];
-            console.log("Materias encontradas: ",materias);
             for(materia of materias){
                 let matriculas = await prisma.Matricula.findMany({where:{materiaId:materia.id}});
                 for(matricula of matriculas){
@@ -110,11 +109,8 @@ const UpdateTeacher = async(params,id)=>{
             where:{id:finalId},
             data:{
                 "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "apellido":params.apellido,
+                "facultadId":params.facultadId
             }
         });
         if(Teacher!=null){

@@ -35,6 +35,33 @@ const getAssignMentById = async(id)=>{
         return("ERROR- NOT A VALID CHARACTER",id)
     }
 }
+const getAssignMentStudentsById = async(id)=>{
+    try {
+        const finalId= parseInt(id);
+        const AssignMent = await prisma.Assignment.findUnique({where:{id:finalId}});
+        if(AssignMent!=null){
+            
+            let tempEstudiantes = [];
+
+            let matriculas = await prisma.Matricula.findMany({where:{materiaId:AssignMent.id}});
+            for(matricula of matriculas){
+                let students = await prisma.Student.findMany({where:{id:matricula.estudianteId}})
+                tempEstudiantes.push(students);
+            }
+            console.log(tempEstudiantes);
+            AssignMent.estudiantes=tempEstudiantes;
+            delete AssignMent.profesorId;
+            delete AssignMent.facultadId;
+
+            return AssignMent;
+        }else{
+            return("NOT FOUND")
+        }
+        
+    } catch (error) {
+        return("ERROR- NOT A VALID CHARACTER",id)
+    }
+}
 
 const UpdateAssignMent = async(params,id)=>{
     try {
@@ -79,5 +106,6 @@ module.exports={
     getAllAssignMents,
     getAssignMentById,
     UpdateAssignMent,
-    RemoveAssignMent
+    RemoveAssignMent,
+    getAssignMentStudentsById
 }

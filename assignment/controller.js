@@ -58,11 +58,24 @@ const getbyId =async(req, res)=>{
     }
     
 }
+const getbyIdStudents =async(req, res)=>{
+    try {
+        const {id} = req.params;
+        const result = await AssignmentServices.getAssignMentStudentsById(id);
+        if(result){
+            res.json({"response":result});
+    }
+    } catch (error) {
+        throw error
+    }
+    
+}
 
 module.exports={
     getAll,
     create,
     update,
     remove,
-    getbyId
+    getbyId,
+    getbyIdStudents
 }
