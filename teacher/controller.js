@@ -58,11 +58,37 @@ const getbyId =async(req, res)=>{
     }
     
 }
+const getbyIdStudents =async(req, res)=>{
+    try {
+        const {id} = req.params;
+        const result = await TeacherServices.getTeacherStudentsById(id);
+        if(result){
+            res.json({"response":result});
+    }
+    } catch (error) {
+        throw error
+    }
+    
+}
+const getbyIdAssignments =async(req, res)=>{
+    try {
+        const {id} = req.params;
+        const result = await TeacherServices.getTeacherAssignmentsById(id);
+        if(result){
+            res.json({"response":result});
+    }
+    } catch (error) {
+        throw error
+    }
+    
+}
 
 module.exports={
     getAll,
     create,
     update,
     remove,
-    getbyId
+    getbyId,
+    getbyIdAssignments,
+    getbyIdStudents
 }
