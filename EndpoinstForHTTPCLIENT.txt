@@ -1,0 +1,51 @@
+Endpoints
+FACULTAD
+http://localhost:8000/facultad/
+http://localhost:8000/facultad/id/
+http://localhost:8000/facultad/id/profesores
+http://localhost:8000/facultad/id/estudiantes
+PROFESOR
+http://localhost:8000/profesor/
+http://localhost:8000/profesor/id
+http://localhost:8000/profesor/id/estudiantes
+http://localhost:8000/profesor/id/materias
+MATERIAS
+http://localhost:8000/materia
+http://localhost:8000/materia/id
+http://localhost:8000/materia/id/estudiantes
+ESTUDIANTES
+http://localhost:8000/estudiante/
+http://localhost:8000/estudiante/id
+http://localhost:8000/estudiante/id/profesores
+
+BODYS
+Matricula - relation student y assignment
+{
+	"cuatrimestre":"primero",
+	"estudianteId":"2",
+	"materiaId":"4"
+}
+Facultad
+{
+	"nombre":"Administracion",
+	"nombre_decano":"Glenn Mora",
+	"abreviacion":"ESCAD"
+}
+materia
+{
+	"nombre":"Finanzas",
+	"profesorId":"8",
+	"facultadId":"2"
+}
+estudiante
+{
+	"nombre":"Julls Davis",
+	"facultadId":"1"
+}
+profesor
+{
+	"nombre":"Mauricio",
+	"apellido":"Rivera",
+	"facultadId":"2"
+}
+
