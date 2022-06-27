@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const _ = require('lodash');
 
 const prisma = new PrismaClient()
 const getAllStudents = async()=>{
@@ -41,6 +42,34 @@ const getStudentById = async(id)=>{
         return("ERROR- NOT A VALID CHARACTER",id)
     }
 }
+const getStudentTeachersById = async(id)=>{
+    try {
+        const finalId= parseInt(id);
+        const Student = await prisma.Student.findUnique({where:{id:finalId}});
+        if(Student!=null){
+            let tempProfesores = [];
+            //let tempMaterias =[];
+            let matriculas = await prisma.Matricula.findMany({where:{estudianteId:Student.id}});
+            console.log(matriculas);
+            for(matricula of matriculas){
+                let materia = await prisma.Assignment.findUnique({where:{id:matricula.materiaId}});
+                let profesor=await prisma.Teacher.findUnique({where:{id:materia.profesorId}});
+                console.log(profesor);
+                tempProfesores.push(profesor);
+            }
+            console.log("All profesores",tempProfesores);
+            
+            Student.profesores=_.uniqWith(tempProfesores,_.isEqual);
+            Student.cantidadProfesores=Student.profesores.length;
+            return Student;
+        }else{
+            return("NOT FOUND")
+        }
+        
+    } catch (error) {
+        return("ERROR- NOT A VALID CHARACTER",id)
+    }
+}
 
 const UpdateStudent = async(params,id)=>{
     try {
@@ -49,11 +78,7 @@ const UpdateStudent = async(params,id)=>{
             where:{id:finalId},
             data:{
                 "nombre":params.nombre,
-                "codigo":params.codigo,
-                "profesor":params.profesor,
-                "inicialesProfesor":params.inicialesProfesor,
-                "creditos":params.creditos,
-                "carrera":params.carrera
+                "facultadId":params.facultadId,
             }
         });
         if(Student!=null){
@@ -87,5 +112,6 @@ module.exports={
     getAllStudents,
     getStudentById,
     UpdateStudent,
-    RemoveStudent
+    RemoveStudent,
+    getStudentTeachersById
 }
