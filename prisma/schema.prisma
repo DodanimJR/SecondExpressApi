@@ -29,6 +29,7 @@ model Assignment{
 }
 model Matricula{
   id Int @id @default(autoincrement())
+  cuatrimestre String
   estudiante Student @relation(fields: [estudianteId],references: [id])
   estudianteId Int
   materia Assignment @relation(fields: [materiaId],references: [id])
