@@ -63,10 +63,7 @@ const getTeacherAssignmentsById = async(id)=>{
         if(Teacher!=null){
             Teacher.materias=await prisma.Assignment.findMany({where:{profesorId:Teacher.id}});
             Teacher.cantidadMaterias=Teacher.materias.length;
-            // for(x of Teacher.materias){
-            //     delete x.facultadId;
-            //     delete x.profesorId;
-            // }
+
             return Teacher;
         }else{
             return("NOT FOUND")
@@ -91,6 +88,7 @@ const getTeacherStudentsById = async(id)=>{
                 }
             }   
             Teacher.estudiantes=_.uniqWith(tempEstudiantes,_.isEqual);
+            Teacher.cantidadEstudiantes=Teacher.estudiantes.length;
             //console.log('Corrected Students',uniqueStudents);
             return Teacher;
         }else{

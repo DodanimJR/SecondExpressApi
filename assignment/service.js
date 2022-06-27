@@ -50,6 +50,7 @@ const getAssignMentStudentsById = async(id)=>{
             }
             console.log(tempEstudiantes);
             AssignMent.estudiantes=tempEstudiantes;
+            AssignMent.cantidadEstudiantes=tempEstudiantes.length;
             delete AssignMent.profesorId;
             delete AssignMent.facultadId;
 
