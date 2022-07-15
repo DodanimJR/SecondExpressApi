@@ -7,6 +7,6 @@ const server = express();
 server.use('/',router)
 
 
-server.listen(PORT,HOST,()=>{
+server.listen(process.env.PORT || PORT,HOST,()=>{
     console.log('Server listening at ', HOST, ' ',PORT);
 })
