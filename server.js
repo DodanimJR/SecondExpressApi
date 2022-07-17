@@ -3,7 +3,9 @@ const HOST = 'localhost';
 const router= require('./router')
 const express = require('express');
 const server = express();
+const cors = require('cors');
 
+server.use(cors());
 server.use('/',router)
 
 
