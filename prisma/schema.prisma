@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://uotw5zz8wtmezkr7ejtc:dA8L83Ahfo9CGeZViXVP@b7nncftdhziqulpn3cfb-postgresql.services.clever-cloud.com:5432/b7nncftdhziqulpn3cfb"
+  url      = env("DATABASE_URL")
 }
 
 model Student{
